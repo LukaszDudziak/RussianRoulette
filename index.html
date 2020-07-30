@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Russian Roulette</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <section class="head">
+            <div class="header">
+                <h1 class="title">russian roulette</h1>
+                <span>Choose number of bullets, then hit start button</span>
+            </div>
+            <section class="settings">
+                <div class="bulletsSetting">
+                    <div class="radioWrap"><span class="radio"></span><input type="radio" name="BulletsNumber"
+                            id="One"><label for="One">One
+                            Bullet</label></div>
+                    <div class="radioWrap"><span class="radio"></span><input type="radio" name="BulletsNumber"
+                            id="Two"><label for="Two">Two
+                            Bullets</label></div>
+                    <div class="radioWrap"><span class="radio"></span><input type="radio" name="BulletsNumber"
+                            id="Three"><label for="Three">Three
+                            Bullets</label></div>
+                    <div class="radioWrap"><span class="radio"></span><input type="radio" name="BulletsNumber"
+                            id="Four"><label for="Four">Four
+                            Bullets</label></div>
+                    <div class="radioWrap"><span class="radio"></span><input type="radio" name="BulletsNumber"
+                            id="Five"><label for="Five">Five
+                            Bullets</label></div>
+                </div>
+                <button class="gameStart">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    START
+                </button>
+
+            </section>
+        </section>
+        <section class="playground">
+            <div class="players">
+                <div class="playerOne">Mike</div>
+                <div class="revolver"></div>
+                <div class="playerTwo">Nick</div>
+            </div>
+            <div class="gun">
+                <button class="shot">shoot</button>
+                <div class="probability">Probability: <span class="probability"></span></div>
+            </div>
+            <div class="roundsMarkers">
+                <div class="marker ">X</div>
+            </div>
+        </section>
+    </div>
+    <script src="main.js"></script>
+</body>
+
+</html>

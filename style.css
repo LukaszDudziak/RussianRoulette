@@ -1,0 +1,216 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 20px;
+    font-family: arial;
+}
+
+.wrapper {
+    max-width: 1024px;
+    margin: 0 auto 0 auto;
+}
+
+.head {
+    text-align: center;
+    padding: 3%;
+}
+
+.header {
+    margin-bottom: 2%;
+}
+
+.title {
+    text-transform: uppercase;
+    font-family: serif;
+    font-size: 2rem;
+}
+
+.settings {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bulletsSetting {
+    width: 25%;
+    padding: 0 3%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+.bulletsSetting div label {
+    display: inline-block;
+    margin-left: 5px;
+    width: 80%;
+    border: solid rgb(14, 13, 13) 2px;
+    border-radius: 0 30% 30% 0;
+    background-color: gold;
+}
+
+.bulletsSetting input {
+    cursor: pointer;
+}
+
+.bulletsSetting input:checked {
+    color: red;
+}
+
+.settings .gameStart {
+    border-radius: 50%;
+    border: solid 2px black;
+    width: 25vh;
+    height: 25vh;
+    position: relative;
+    font-size: 15px;
+    background-color: #333;
+    color: white;
+}
+
+.dot {
+    width: 5vh;
+    height: 5vh;
+    background-color: #000;
+    border-radius: 50%;
+    position: absolute;
+    transition: .3s;
+}
+
+.dot:nth-child(1) {
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 25%);
+}
+
+.dot:nth-child(2) {
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, -125%);
+}
+
+.dot:nth-child(3) {
+    top: 50%;
+    left: 100%;
+    transform: translate(-150%, 25%);
+}
+
+.dot:nth-child(4) {
+    top: 50%;
+    left: 100%;
+    transform: translate(-150%, -125%);
+}
+
+.dot:nth-child(5) {
+    top: 50%;
+    left: 0%;
+    transform: translate(50%, 25%);
+}
+
+.dot:nth-child(6) {
+    top: 50%;
+    left: 0%;
+    transform: translate(50%, -125%);
+}
+
+.settings .gameStart:hover .dot {
+    background-color: rgb(88, 7, 7);
+}
+
+.playground {
+    margin: 5% 0 0 0;
+    width: 100%;
+    height: 20vh;
+    position: relative;
+}
+
+.players {
+    color: white
+}
+
+.players .playerOne {
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 100px;
+    width: 100px;
+    height: 100px;
+    background-color: rgb(41, 27, 27);
+}
+
+.players .playerTwo {
+    position: absolute;
+    top: 25%;
+    left: 75%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 100px;
+    width: 100px;
+    height: 100px;
+    background-color: burlywood;
+}
+
+.revolver {
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 5%;
+    height: 10%;
+    background-color: #000;
+}
+
+.playground .gun {
+    position: absolute;
+    top: 75%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.gun .shot {
+    line-height: 30px;
+    width: 80%;
+    margin-bottom: 10%;
+    text-transform: uppercase;
+    background-color: #fff;
+    border: black 1px solid;
+    transition: .4s;
+}
+
+.gun .shot:hover {
+    background-color: rgb(88, 7, 7);
+    color: white;
+}
+
+.roundsMarkers {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 50%;
+    height: 40%;
+    border: black 1px solid;
+    background-color: #000;
+}
+
+.marker {
+    position: absolute;
+    border: black 1px solid;
+    background-color: white;
+    color: black;
+    font-size: 50px;
+    text-align: center;
+    width: 10%;
+    height: 100%;
+}
+
+.dead {
+    background-color: rgb(88, 7, 7);
+}
