@@ -165,6 +165,7 @@
     width: 5%;
     height: 10%;
     background-color: #000;
+    transition: .3s;
 }
 
 .playground .gun {
