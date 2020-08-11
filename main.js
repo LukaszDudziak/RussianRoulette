@@ -1,1 +1,3 @@
-const game = new Game;
+document.querySelector('.gameStart').addEventListener('click', () => {
+    const game = new Game;
+})

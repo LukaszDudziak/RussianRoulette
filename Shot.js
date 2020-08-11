@@ -1,6 +1,7 @@
 class Shot {
     //creating shot class
     constructor(shootingGun, activePlayer) {
+        //creating getters for method's results
         let _result = this.shoot(shootingGun);
         this.getShotResult = () => _result;
         let _change = this.changeShooter(activePlayer);
@@ -17,7 +18,7 @@ class Shot {
             return false;
         }
     }
-
+    //changing shooting player
     changeShooter(activePlayer) {
         if (activePlayer == 1) {
             return 2;

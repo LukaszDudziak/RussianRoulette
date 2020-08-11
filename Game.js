@@ -3,29 +3,41 @@ class Game {
         this.gun = new Gun();
         this.activePlayer;
         this.shot;
-        document.querySelector('.gameStart').addEventListener('click', this.startGame())
+        this.startGame();
+        // document.querySelector('.gameStart').addEventListener('click', this.startGame())
     }
 
     startGame = () => {
 
-        // console.log('działa')
+        // console.log('works')
+        //first, i've got loaded gun, i have to spin cyllinder
         this.gun.spinCylinder()
+        //than, with spinning gun, i have active player
         this.activePlayer = this.gun.spinWithGun();
-        console.log(this.activePlayer)
+        // console.log(this.activePlayer)
+        //now, he can make shot
         document.querySelector('.gun .shot').addEventListener('click', () => {
+            //i must create new variables, to prevent losing "this" from that stage, with arrow function i'm not creating new ones, just taking from function above
             let shootingGun = this.gun;
             let activePlayer = this.activePlayer;
-            console.log(this.activePlayer)
+            // console.log(this.activePlayer)
+            //creating new shot 
             this.shot = new Shot(shootingGun, activePlayer)
+            //checking what was shot result
             if (this.shot.getShotResult() == true) {
-                if (activePlayer = 1) {
-                    console.log("BANG! Mike is DEAD")
+                //checking which player was pulling trigger if bullet was in chamber
+                if (activePlayer == 1) {
+                    alert("BANG! Mike is DEAD")
                 } else {
-                    console.log('BANG! Nick is DEAD')
+                    alert('BANG! Nick is DEAD')
                 }
             } else {
+
+                //passing gun to other player
                 this.activePlayer = this.shot.changeShooter(this.activePlayer)
             }
         })
     }
 }
+
+//i should create variable in which will be result of shot, and this will provide info for creating new marks 
