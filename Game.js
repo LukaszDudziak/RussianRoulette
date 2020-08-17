@@ -4,6 +4,7 @@ class Game {
         this.activePlayer;
         this.shot;
         this.startGame();
+        this.marker;
         // document.querySelector('.gameStart').addEventListener('click', this.startGame())
     }
 
@@ -25,14 +26,19 @@ class Game {
             this.shot = new Shot(shootingGun, activePlayer)
             //checking what was shot result
             if (this.shot.getShotResult() == true) {
+                this.marker = new Marker(0);
+                document.querySelector('.gun .shot').disabled = true;
+                setTimeout(function () {
+                    location.reload()
+                }, 5000);
                 //checking which player was pulling trigger if bullet was in chamber
                 if (activePlayer == 1) {
-                    alert("BANG! Mike is DEAD")
+                    alert("BANG! Mike is DEAD");
                 } else {
-                    alert('BANG! Nick is DEAD')
+                    alert('BANG! Nick is DEAD');
                 }
             } else {
-
+                this.marker = new Marker(1);
                 //passing gun to other player
                 this.activePlayer = this.shot.changeShooter(this.activePlayer)
             }

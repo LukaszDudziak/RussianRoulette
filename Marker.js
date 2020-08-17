@@ -1,15 +1,22 @@
 class Marker {
-    stillAlive() {
-        const mark = document.createElement('div').classList.add('mark')
-        document.querySelector('.roundsMarkers').appendChild(mark)
-        return 1;
+    constructor(isAlive) {
+        let _condition = this.condition(isAlive);
+        this.getCondition = () => _condition;
     }
 
-    deadOne() {
-        const mark = document.createElement('div').classList.add('mark,dead')
-        document.querySelector('.roundsMarkers').appendChild(mark)
-        return 0;
+    condition(isAlive) {
+        let destination = document.querySelector('.roundsMarkers');
+        let mark = document.createElement('div');
+        mark.classList.add('marker');
+        if (isAlive == 0) {
+            mark.textContent = "X";
+            mark.classList.add('dead');
+            destination.append(mark);
+            return 0;
+        } else {
+            mark.textContent = "O";
+            destination.append(mark);
+            return 1;
+        }
     }
-
-
 }
