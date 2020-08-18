@@ -60,7 +60,7 @@ class Gun {
             return activePlayer;
         }
     }
-
+    //as the name says, css edit
     giveToOtherPlayer() {
         if (document.querySelector('.revolver').style.left == '33%') {
             document.querySelector('.revolver').style.left = '69%';

@@ -26,8 +26,11 @@ class Game {
             this.shot = new Shot(shootingGun, activePlayer)
             //checking what was shot result
             if (this.shot.getShotResult() == true) {
+                //creating dead marker
                 this.marker = new Marker(0);
+                //disabling shot button after player death
                 document.querySelector('.gun .shot').disabled = true;
+                //delaying page reload after end of game
                 setTimeout(function () {
                     location.reload()
                 }, 5000);
@@ -38,6 +41,7 @@ class Game {
                     alert('BANG! Nick is DEAD');
                 }
             } else {
+                //creating white marker
                 this.marker = new Marker(1);
                 //passing gun to other player
                 this.activePlayer = this.shot.changeShooter(this.activePlayer)

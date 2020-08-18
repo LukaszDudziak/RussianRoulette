@@ -43,6 +43,7 @@
 .bulletsSetting div label {
     display: inline-block;
     margin-left: 5px;
+    min-width: calc(1024px/4)*0.6;
     width: 80%;
     border: solid rgb(14, 13, 13) 2px;
     border-radius: 0 30% 30% 0;
@@ -60,8 +61,8 @@
 .settings .gameStart {
     border-radius: 50%;
     border: solid 2px black;
-    width: 25vh;
-    height: 25vh;
+    width: 175px;
+    height: 175px;
     position: relative;
     font-size: 15px;
     background-color: #333;
@@ -70,8 +71,8 @@
 }
 
 .dot {
-    width: 5vh;
-    height: 5vh;
+    width: 35px;
+    height: 35px;
     background-color: #000;
     border-radius: 50%;
     position: absolute;

@@ -18,7 +18,7 @@ class Shot {
             return false;
         }
     }
-    //changing shooting player
+    //changing shooting player, by returning active player id
     changeShooter(activePlayer) {
         if (activePlayer == 1) {
             return 2;
