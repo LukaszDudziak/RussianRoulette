@@ -1,0 +1,24 @@
+1. Gracz przez pulsujące buttony pocisków ustala ile naboi ładuje:
+    - wywołana jest komenda ładowania bębna 
+    - dźwięk ładowania 
+2. Gracz klika w pulsujący button bębna:
+    - bęben zostaje zakręcony
+    - animacja
+    - dźwięk
+3. Jeśli to początek gry, gracz ma możliwość kliknięcia w pulsujący button broni:
+    - losowany jest pierwszy gracz 
+    - animacja 
+4. Jeden z graczy ma do wykonania strzał (pulsujący button shot):
+    - sprawdzana jest zawartość komory
+        a) jeśli komora pusta:
+            - dźwięk spustu
+            - w polu rund pojawia się żywy emotikon
+        b) jeśli komora pełna:
+            - dźwięk strzału 
+            - martwy emotikon w polu rund 
+            - pole gry zalane czerwonym ekranem
+            - popup z informacją o śmierci gracza i możliwością rozpoczęcia ponownie
+
+4a->5. Gracz może wcisnąć znowu bęben, ponowna animacja i dźwięk
+6. Broń zostaje przekazana automatycznie do gracza, który nie wykonywał pierwszego strzału
+7. Powtarzane są kolejno kroki do momentu, aż któryś z graczy dojdzie do momentu 4b
