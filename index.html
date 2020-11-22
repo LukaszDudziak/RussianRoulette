@@ -3,65 +3,82 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1,minimum-scale=1">
     <title>Russian Roulette</title>
     <link rel="stylesheet" href="style.css">
+    <!-- <div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div> -->
+
 </head>
 
 <body>
-    <div class="wrapper">
-        <section class="head">
-            <div class="header">
-                <h1 class="title">russian roulette</h1>
-                <span>Choose number of bullets, then hit start button</span>
-            </div>
-            <section class="settings">
-                <div class="bulletsSetting">
-                    <div class="radioWrap"><span class="radio"></span><input type="radio" name="BulletsNumber"
-                            id="1"><label for="One">One
-                            Bullet</label></div>
-                    <div class="radioWrap"><span class="radio"></span><input type="radio" name="BulletsNumber"
-                            id="2"><label for="Two">Two
-                            Bullets</label></div>
-                    <div class="radioWrap"><span class="radio"></span><input type="radio" name="BulletsNumber"
-                            id="3"><label for="Three">Three
-                            Bullets</label></div>
-                    <div class="radioWrap"><span class="radio"></span><input type="radio" name="BulletsNumber"
-                            id="4"><label for="Four">Four
-                            Bullets</label></div>
-                    <div class="radioWrap"><span class="radio"></span><input type="radio" name="BulletsNumber"
-                            id="5"><label for="Five">Five
-                            Bullets</label></div>
+   <div class="game">
+       <div class="game__containter">
+           <div class="game__layer start-screen" id="js-start-screen">
+                <h1 class='start-screen_title'>Russian Roulette</h1>
+                <button class="start-screen_button" id="js-start-button">New game</button>
+                <button class="start-screen_button" id="js-settings-button">Settings</button>
+           </div>
+           <div class="game__layer settings-screen hidden" id='js-settings-screen'>
+                <button class="start-screen_button">Mute music</button>
+                <button class="start-screen_button">Mute sounds</button>
+                <button class="start-screen_button">Back to menu</button>
+           </div>
+           <div class="game__layer game-screen hidden" id='js-game-screen'>
+                <div class="game-screen_gun-options">
+                    <div class="game-screen_bullets-number" id='js-game-bullets-number'>
+                        <label class="bullets-number-radio">
+                            <input type="radio" name="bullets-number">
+                            <img src="./assets/images/bullet.png" alt="">
+                            <img src="./assets/images/bullet.png" alt="">
+                            <img src="./assets/images/bullet.png" alt="">
+                            <img src="./assets/images/bullet.png" alt="">
+                            <img src="./assets/images/bullet.png" alt="">
+                        </label>
+                        <label class="bullets-number-radio">
+                            <input type="radio" name="bullets-number">
+                            <img src="./assets/images/bullet.png" alt="">
+                            <img src="./assets/images/bullet.png" alt="">
+                            <img src="./assets/images/bullet.png" alt="">
+                            <img src="./assets/images/bullet.png" alt="">
+                        </label>
+                        <label class="bullets-number-radio">
+                            <input type="radio" name="bullets-number">
+                            <img src="./assets/images/bullet.png" alt="">
+                            <img src="./assets/images/bullet.png" alt="">
+                            <img src="./assets/images/bullet.png" alt="">
+                        </label>
+                        <label class="bullets-number-radio">
+                            <input type="radio" name="bullets-number">
+                            <img src="./assets/images/bullet.png" alt="">
+                            <img src="./assets/images/bullet.png" alt="">
+                        </label>
+                        <label class="bullets-number-radio">
+                            <input type="radio" name="bullets-number">
+                            <img src="./assets/images/bullet.png" alt="">
+                        </label>
+                    </div>
+                    <div class="game-screen_gun-cylinder" id='js-game-gun-cylinder'>
+                        <button class="gun-cylinder-load-button">Load</button>
+                        <button class="gun-cylinder_spin-button" id='js-gun-cylinder-button'><p id='js-gun-cylinder-button-description'>Spin</p></button>
+                    </div>
                 </div>
-                <button class="gameStart">
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-                    START
-                </button>
-
-            </section>
-        </section>
-        <section class="playground">
-            <div class="players">
-                <div class="playerOne">Mike</div>
-                <div class="revolver"></div>
-                <div class="playerTwo">Nick</div>
-            </div>
-            <div class="gun">
-                <button class="shot">shoot</button>
-            </div>
-            <div class="roundsMarkers"></div>
-        </section>
-    </div>
-    <script src="Gun.js"></script>
-    <script src="Shot.js"></script>
-    <script src="Marker.js"></script>
-    <script src="Game.js"></script>
-    <script src="main.js"></script>
+                <div class="game-screen_playground">
+                    <div class="playground_player player-one" id='js-game-player-one'></div>
+                    <button class="playground_gun" id='js-game-gun'></button>
+                    <div class="playground_player player-two" id='js-game-player-two'></div>
+                </div>
+                <div class="game-screen_rounds-counter" id='js-game-rounds-counter'></div>
+           </div>
+           <div class="game__layer end-screen hidden" id='js-end-screen'>
+               <div class="end-screen_modal">
+                    <div class='end-screen_verdict'>
+                        <p class="end-screen_dead-player" id='js-end-screen-dead-player'>Player 1 is dead after x rounds</p>
+                    </div>
+                    <button class="end-screen_button " id='js-restart-button'>Restart</button>
+                </div>
+           </div>
+       </div>
+   </div>
 </body>
 
 </html>

@@ -1,220 +1,180 @@
+:root {
+  --scale-value: 1;
+}
+
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-size: 20px;
-    font-family: arial;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 20px;
+  font-family: arial;
 }
 
-.wrapper {
-    max-width: 1024px;
-    margin: 0 auto 0 auto;
+*:focus {
+  outline: none;
+}
+.game {
+  width: 100vh;
+  height: 100vh;
+  margin: auto;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+.game__containter {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
-.head {
-    text-align: center;
-    padding: 3%;
+/* start-screen */
+
+.start-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.header {
-    margin-bottom: 2%;
+.start-screen_title {
+  align-self: center;
+  margin-bottom: 30px;
 }
 
-.title {
-    text-transform: uppercase;
-    font-family: serif;
-    font-size: 2rem;
+.start-screen_button {
+  background-color: transparent;
+  padding: 15px;
+  margin: 20px;
 }
 
-.settings {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.settings-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.bulletsSetting {
-    width: 25%;
-    padding: 0 3%;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
+/* game-screen */
+
+.game-screen {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
-.bulletsSetting div label {
-    display: inline-block;
-    margin-left: 5px;
-    min-width: calc(1024px/4)*0.6;
-    width: 80%;
-    border: solid rgb(14, 13, 13) 2px;
-    border-radius: 0 30% 30% 0;
-    background-color: gold;
+.game-screen_gun-options {
+  display: flex;
+  justify-content: space-around;
 }
 
-.bulletsSetting input {
-    cursor: pointer;
+.game-screen_bullets-number {
+  display: flex;
+  flex-direction: column;
 }
 
-.bulletsSetting input:checked {
-    color: red;
+.bullets-number-radio > img {
+  margin-left: -25px;
 }
 
-.settings .gameStart {
-    border-radius: 50%;
-    border: solid 2px black;
-    width: 175px;
-    height: 175px;
-    position: relative;
-    font-size: 15px;
-    background-color: #333;
-    color: white;
-    cursor: pointer;
+.game-screen_gun-cylinder {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
 }
 
-.dot {
-    width: 35px;
-    height: 35px;
-    background-color: #000;
-    border-radius: 50%;
-    position: absolute;
-    transition: .3s;
+.gun-cylinder-load-button {
+  background-color: transparent;
+  padding: 20px;
 }
 
-.dot:nth-child(1) {
-    top: 0;
-    left: 50%;
-    transform: translate(-50%, 25%);
+.gun-cylinder_spin-button {
+  width: 256px;
+  height: 256px;
+  border-radius: 50%;
+  background-image: url("./assets/images/cylinder.png");
+  background-position: center;
+  background-size: auto;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: transparent;
+}
+.gun-cylinder_spin-button:hover {
+  color: red;
 }
 
-.dot:nth-child(2) {
-    top: 100%;
-    left: 50%;
-    transform: translate(-50%, -125%);
+.game-screen_playground {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 
-.dot:nth-child(3) {
-    top: 50%;
-    left: 100%;
-    transform: translate(-150%, 25%);
+/* don't really know why, but when i make bgc in 256x256 box, the weird gray line appears on the top of player's portrait, this "trick" with +1px in height seems to deal with that weird problem */
+.playground_player {
+  width: 256px;
+  height: 257px;
+  border-radius: 10%;
+  background-image: url(./assets/images/player.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: 0.3s;
 }
 
-.dot:nth-child(4) {
-    top: 50%;
-    left: 100%;
-    transform: translate(-150%, -125%);
+.playground_gun {
+  width: 128px;
+  height: 70px;
+  border: none;
+  background-image: url("./assets/images/big-revolver.png");
+  background-position: center;
+  background-color: transparent;
+  transform: rotate(90deg);
+  cursor: pointer;
 }
 
-.dot:nth-child(5) {
-    top: 50%;
-    left: 0%;
-    transform: translate(50%, 25%);
+.game-screen_rounds-counter {
+  align-self: center;
+  background-color: #ddd;
+  width: 640px;
+  height: 64px;
+  background-image: url("./assets/images/skull.png");
 }
 
-.dot:nth-child(6) {
-    top: 50%;
-    left: 0%;
-    transform: translate(50%, -125%);
+/* end-screen */
+
+.end-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.settings .gameStart:hover .dot {
-    background-color: rgb(88, 7, 7);
+.end-screen_modal {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
 }
 
-.playground {
-    margin: 5% 0 0 0;
-    width: 100%;
-    height: 20vh;
-    position: relative;
+.end-screen_verdict {
+  line-height: 40px;
 }
 
-.players {
-    color: white
+.end-screen_button {
+  background-color: transparent;
+  padding: 15px;
+  margin: 20px;
 }
 
-.players .playerOne {
-    position: absolute;
-    top: 25%;
-    left: 25%;
-    transform: translate(-50%, -50%);
-    border-radius: 50%;
-    text-transform: uppercase;
-    text-align: center;
-    line-height: 100px;
-    width: 100px;
-    height: 100px;
-    background-color: rgb(41, 27, 27);
-}
-
-.players .playerTwo {
-    position: absolute;
-    top: 25%;
-    left: 75%;
-    transform: translate(-50%, -50%);
-    border-radius: 50%;
-    text-transform: uppercase;
-    text-align: center;
-    line-height: 100px;
-    width: 100px;
-    height: 100px;
-    background-color: burlywood;
-}
-
-.revolver {
-    position: absolute;
-    top: 25%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 5%;
-    height: 10%;
-    background-color: #000;
-    transition: .3s;
-}
-
-.playground .gun {
-    position: absolute;
-    top: 75%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-}
-
-.gun .shot {
-    line-height: 30px;
-    width: 120%;
-    margin-bottom: 10%;
-    text-transform: uppercase;
-    background-color: #fff;
-    border: black 1px solid;
-    transition: .4s;
-}
-
-.gun .shot:hover {
-    background-color: rgb(88, 7, 7);
-    color: white;
-}
-
-.roundsMarkers {
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translate(-50%, 0);
-    width: 50%;
-    border: black 1px solid;
-    background-color: #333;
-    font-size: 0;
-    /* height: calc(3rem+1px); */
-}
-
-.marker {
-    display: inline-block;
-    border-right: black 1px solid;
-    background-color: white;
-    color: black;
-    text-align: center;
-    line-height: 3rem;
-    width: calc(100%/6);
-
-}
-
-.dead {
-    background-color: rgb(88, 7, 7);
+.hidden {
+  display: none;
 }
