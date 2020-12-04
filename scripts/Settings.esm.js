@@ -1,5 +1,7 @@
-import { Common } from "./Common.esm.js";
+import { Common, HIDDEN_MODE, VISIBLE_MODE } from "./Common.esm.js";
+import { START_SCREEN } from "./MainMenu.esm.js";
 
+//DOM elements
 const MUTE_MUSIC_BUTTON = "js-mute-music-button";
 const MUTE_SOUNDS_BUTTON = "js-mute-sounds-button";
 const BACK_TO_MENU_BUTTON = "js-settings-back-to-menu-button";
@@ -11,7 +13,7 @@ class Settings extends Common {
     super(SETTINGS_SCREEN);
     this.bindSettingsElements();
   }
-
+  //binding elements from settings screen
   bindSettingsElements() {
     const muteMusicButton = this.bindToElement(MUTE_MUSIC_BUTTON);
     const muteSoundsButton = this.bindToElement(MUTE_SOUNDS_BUTTON);
@@ -31,7 +33,8 @@ class Settings extends Common {
   }
 
   backToMenu() {
-    console.log("back");
+    this.changeVisibilityScreen(this.element, HIDDEN_MODE);
+    this.changeVisibilityScreen(this.bindToElement(START_SCREEN), VISIBLE_MODE);
   }
 }
 

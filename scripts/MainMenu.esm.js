@@ -3,9 +3,10 @@ import { GAME_SCREEN } from "./Game.esm.js";
 import { SETTINGS_SCREEN } from "./Settings.esm.js";
 
 //DOM elements id's
-const START_SCREEN = "js-start-screen";
 const NEW_GAME_BUTTON = "js-start-button";
 const SETTINGS_BUTTON = "js-settings-button";
+
+export const START_SCREEN = "js-start-screen";
 
 class MainMenu extends Common {
   constructor() {

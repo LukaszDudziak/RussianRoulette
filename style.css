@@ -79,6 +79,13 @@
   flex-direction: column;
 }
 
+.bullets-number-input {
+  display: none;
+}
+.bullets-number-input:checked + .bullets-number-radio {
+  background-color: #eee;
+}
+
 .bullets-number-radio > img {
   margin-left: -25px;
 }
