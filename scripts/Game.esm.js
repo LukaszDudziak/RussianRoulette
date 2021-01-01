@@ -1,12 +1,26 @@
+import { Common } from "./Common.esm.js";
+import { Gun } from "./Gun.esm.js";
+
 export const GAME_SCREEN = "js-game-screen";
 
-const BULLETS_NUMBER_SECTION = "js-game-bullets-number";
-const BULLETS_NUMBER = "js-bullets-number";
-const CYLINDER_LOAD_BUTTON = "js-gun-cylinder-load-button";
-const CYLINDER_SPIN_BUTTON = "js-gun-cylinder-spin-button";
-const CYLINDER_SPIN_BUTTON_DESCRIPTION =
-  "js-gun-cylinder-spin-button-description";
-const 
-class Game {
-  constructor() {}
+const PLAYGROUND_PLAYER_ONE = "js-game-player-one";
+const PLAYGROUND_PLAYER_TWO = "js-game-player-two";
+
+const PLAYGROUND_GUN = "js-game-gun";
+
+const GAME_ROUNDS_COUNTER = "js-game-rounds-counter";
+
+class Game extends Common {
+  constructor() {
+    super(GAME_SCREEN);
+  }
+
+  playGame() {
+    const gun = new Gun();
+    console.log("dziala");
+  }
 }
+
+//have to move it somewhere up
+const game = new Game();
+game.playGame();
