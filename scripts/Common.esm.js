@@ -16,7 +16,6 @@ export class Common {
 
   //changing visibility based on element(active screen) and selected display mode (visible/hidden)
   changeVisibilityScreen(element, mode) {
-    console.log(element);
     mode === VISIBLE_MODE
       ? element.classList.remove(HIDDEN_CLASS)
       : element.classList.add(HIDDEN_CLASS);
