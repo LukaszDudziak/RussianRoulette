@@ -1,15 +1,17 @@
 import { Common } from "./Common.esm.js";
+import { game } from "./Game.esm.js";
 
-const GUN_OPTIONS = "game-screen_gun-options";
-// const BULLETS_NUMBER_SECTION = "js-game-bullets-number";
 const CYLINDER_SPIN_BUTTON_DESCRIPTION =
   "js-gun-cylinder-spin-button-description";
 
-const 
+export const PLAYGROUND_GUN = "js-game-gun";
+
+const MAX_CYLINDER_SPINS = 6;
+const MAX_GUN_SPINS = 6;
 
 export class Gun extends Common {
   constructor(loadedBulletsNumber) {
-    super(GUN_OPTIONS);
+    super();
     this.bindToElements();
     //first state of new gun's cylinder
     this.cylinder = [0, 0, 0, 0, 0, 0];
@@ -17,12 +19,11 @@ export class Gun extends Common {
     this.#createNewGun();
   }
 
-  //binding standard elements, and bulletsNumber nodeList, which provides information, how many bullets are getting loaded
   bindToElements() {
-    // this.bulletsNumberSection = this.bindToElement(BULLETS_NUMBER_SECTION);
     this.cylinderSpinButtonDescription = this.bindToElement(
       CYLINDER_SPIN_BUTTON_DESCRIPTION
     );
+    this.gunButton = this.bindToElement(PLAYGROUND_GUN);
   }
   //creating new gun at game start
   #createNewGun() {
@@ -48,15 +49,45 @@ export class Gun extends Common {
 
   //method to spin cylinder
   spinCylinder() {
-    //hardcoded max 6 spins
-    let spins = Math.floor(Math.random() * 6);
+    //
+    let cylinderSpins = Math.floor(Math.random() * MAX_CYLINDER_SPINS);
     //overwritting "cylinder" can cause error, where existing bullet (1) is overwritten, that's why i create new variable
     let spinnedCylinder = this.cylinder.slice(0);
     for (let i = 0; i < spinnedCylinder.length; i++) {
-      spinnedCylinder[(i + spins) % 6] = this.cylinder[i];
+      spinnedCylinder[(i + cylinderSpins) % 6] = this.cylinder[i];
     }
     this.cylinder = spinnedCylinder;
     console.log(this.cylinder);
     console.log("cylinder spinned");
+  }
+  //gun spinning method
+  spinGun() {
+    //initial randoms for number of spins, and number that decides from whom spinning starts
+    let startingPlayer = Math.floor(Math.random() * 2);
+    let gunSpins = Math.floor(Math.random() * MAX_GUN_SPINS);
+
+    if (
+      (startingPlayer == 0 && gunSpins % 2 == 0) ||
+      (startingPlayer == 1 && gunSpins % 2 == 1)
+    ) {
+      this.gunButton.classList.add("gun_player_one");
+      return 0;
+    } else {
+      this.gunButton.classList.add("gun_player_two");
+      return 1;
+    }
+  }
+
+  //add event listener on gunButton
+  triggerUnlockListener() {
+    this.gunButton.addEventListener("click", this.pullTrigger);
+  }
+
+  //pulling trigger by player
+  pullTrigger() {
+    const { gun, endGame } = game;
+    if (gun.cylinder[0] == 1) {
+      endGame();
+    }
   }
 }

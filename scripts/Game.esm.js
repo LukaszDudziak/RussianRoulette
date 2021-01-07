@@ -1,13 +1,11 @@
 import { Common } from "./Common.esm.js";
 import { Gun } from "./Gun.esm.js";
+import { Player } from "./Player.esm.js";
 
 const CYLINDER_SPIN_BUTTON = "js-gun-cylinder-spin-button";
 const CYLINDER_LOAD_BUTTON = "js-gun-cylinder-load-button";
 const BULLETS_NUMBER = "js-bullets-number";
 
-const PLAYGROUND_PLAYER_ONE = "js-game-player-one";
-const PLAYGROUND_PLAYER_TWO = "js-game-player-two";
-const PLAYGROUND_GUN = "js-game-gun";
 const GAME_ROUNDS_COUNTER = "js-game-rounds-counter";
 
 export const GAME_SCREEN = "js-game-screen";
@@ -17,9 +15,13 @@ class Game extends Common {
     super(GAME_SCREEN);
     this.bindToElements();
     this.#cylinderLoadListener();
-    this.loadedBulletsNumber = 0;
+    // this.playerOne = new Player();
+    // this.playerTwo = new Player();
+    this.activePlayer = new Player();
+    this.loadedBulletsNumber;
+    this.gun;
   }
-  //bind used elements
+  //binding standard elements, and bulletsNumber nodeList, which provides information, how many bullets are getting loaded
   bindToElements() {
     this.bulletsNumber = document.getElementsByName(BULLETS_NUMBER);
     this.cylinderLoadButton = this.bindToElement(CYLINDER_LOAD_BUTTON);
@@ -28,11 +30,15 @@ class Game extends Common {
 
   //main method for gameflow
   playGame = () => {
+    console.log("players connected");
     this.#checkBulletsNumber();
     if (!this.loadedBulletsNumber == 0) {
       this.#disableChoices();
-      const gun = new Gun(this.loadedBulletsNumber);
-      console.log(gun.cylinder);
+      this.gun = new Gun(this.loadedBulletsNumber);
+      console.log(`In game cylinder [${this.gun.cylinder}]`);
+      this.activePlayer.number = this.gun.spinGun();
+      console.log(`active player is ` + this.activePlayer.number);
+      this.#triggerUnlock();
     } else {
       alert("How many bullets?"); //in next version change to animation
     }
@@ -56,10 +62,20 @@ class Game extends Common {
     });
   }
 
+  //for player - unlocking gun button, for AI playing whole round !!!
+  #triggerUnlock() {
+    this.gun.triggerUnlockListener();
+  }
+
   #cylinderLoadListener() {
     this.cylinderLoadButton.addEventListener("click", this.playGame);
   }
+
+  //game end
+  endGame = () => {
+    this.activePlayer.playersDeath();
+  };
 }
 
 //have to move it somewhere up
-const game = new Game();
+export const game = new Game();

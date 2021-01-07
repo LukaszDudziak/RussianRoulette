@@ -146,6 +146,13 @@
   cursor: pointer;
 }
 
+.gun_player_one {
+  transform: rotate(180deg);
+}
+.gun_player_two {
+  transform: rotate(0deg);
+}
+
 .game-screen_rounds-counter {
   align-self: center;
   background-color: #ddd;
