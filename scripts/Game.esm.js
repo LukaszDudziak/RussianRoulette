@@ -62,14 +62,29 @@ class Game extends Common {
     });
   }
 
-  //for player - unlocking gun button, for AI playing whole round !!!
+  //for player - unlocking gun button, for AI automaticly pulling trigger
   #triggerUnlock() {
-    this.gun.triggerUnlockListener();
+    if (this.activePlayer.number == 1) {
+      console.log("działa");
+      this.gun.pullTrigger();
+    } else {
+      this.gun.triggerUnlockListener();
+    }
   }
 
   #cylinderLoadListener() {
     this.cylinderLoadButton.addEventListener("click", this.playGame);
   }
+
+  changeActivePlayer = () => {
+    //changing active player, with use of his number
+    this.activePlayer.number = Number(!this.activePlayer.number);
+    console.log(this.activePlayer.number + " is now active");
+    //without this "if", listener on gun button will never be enabled, if AI player starts
+    if (this.activePlayer.number == 0) {
+      this.#triggerUnlock();
+    }
+  };
 
   //game end
   endGame = () => {

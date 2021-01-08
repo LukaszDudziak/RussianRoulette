@@ -85,9 +85,21 @@ export class Gun extends Common {
 
   //pulling trigger by player
   pullTrigger() {
-    const { gun, endGame } = game;
+    const { gun, endGame, changeActivePlayer } = game;
     if (gun.cylinder[0] == 1) {
       endGame();
+    } else {
+      //copy of original cylinder
+      let cylinderAfterEmptyChamber = gun.cylinder.slice();
+      //remove first position
+      cylinderAfterEmptyChamber.splice(0, 1);
+      //add empty chamber on last position
+      cylinderAfterEmptyChamber.push(0);
+      //override game gun's cylinder
+      gun.cylinder = cylinderAfterEmptyChamber;
+      console.log(gun.cylinder);
+      //change active player
+      changeActivePlayer();
     }
   }
 }
