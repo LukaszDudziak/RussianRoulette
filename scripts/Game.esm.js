@@ -2,7 +2,6 @@ import { Common } from "./Common.esm.js";
 import { Gun } from "./Gun.esm.js";
 import { Player } from "./Player.esm.js";
 
-const CYLINDER_SPIN_BUTTON = "js-gun-cylinder-spin-button";
 const CYLINDER_LOAD_BUTTON = "js-gun-cylinder-load-button";
 const BULLETS_NUMBER = "js-bullets-number";
 
@@ -25,9 +24,7 @@ class Game extends Common {
   bindToElements() {
     this.bulletsNumber = document.getElementsByName(BULLETS_NUMBER);
     this.cylinderLoadButton = this.bindToElement(CYLINDER_LOAD_BUTTON);
-    this.cylinderSpinButton = this.bindToElement(CYLINDER_SPIN_BUTTON);
   }
-
   //main method for gameflow
   playGame = () => {
     console.log("players connected");
@@ -65,11 +62,23 @@ class Game extends Common {
   //for player - unlocking gun button, for AI automaticly pulling trigger
   #triggerUnlock() {
     if (this.activePlayer.number == 1) {
-      console.log("działa");
       this.gun.pullTrigger();
     } else {
       this.gun.triggerUnlockListener();
     }
+  }
+
+  //for player - unlocking cylinder button, for AI automaticly pulling trigger
+  #spinCylinder() {
+    //locking gun trigger before player turn
+    this.gun.triggerUnlockToggle();
+    if (this.activePlayer.number == 1) {
+      this.gun.spinCylinder();
+    } else {
+      this.gun.cylinderUnlockListener();
+    }
+    //unlock spin before player's turn (after AI turn)
+    this.gun.cylinderUnlockToggle();
   }
 
   #cylinderLoadListener() {
@@ -80,10 +89,10 @@ class Game extends Common {
     //changing active player, with use of his number
     this.activePlayer.number = Number(!this.activePlayer.number);
     console.log(this.activePlayer.number + " is now active");
-    //without this "if", listener on gun button will never be enabled, if AI player starts
-    if (this.activePlayer.number == 0) {
-      this.#triggerUnlock();
-    }
+    //spin cylinder before pulling trigger
+    this.#spinCylinder();
+    //looping game
+    this.#triggerUnlock();
   };
 
   //game end

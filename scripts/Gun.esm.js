@@ -1,28 +1,26 @@
 import { Common } from "./Common.esm.js";
 import { game } from "./Game.esm.js";
 
-const CYLINDER_SPIN_BUTTON_DESCRIPTION =
-  "js-gun-cylinder-spin-button-description";
+const CYLINDER_SPIN_BUTTON = "js-gun-cylinder-spin-button";
 
 export const PLAYGROUND_GUN = "js-game-gun";
 
 const MAX_CYLINDER_SPINS = 6;
 const MAX_GUN_SPINS = 6;
+const CHAMBERS_NUMBER = 6;
 
 export class Gun extends Common {
   constructor(loadedBulletsNumber) {
     super();
     this.bindToElements();
     //first state of new gun's cylinder
-    this.cylinder = [0, 0, 0, 0, 0, 0];
+    (this.cylinder = []).length = CHAMBERS_NUMBER;
     this.loadedBulletsNumber = loadedBulletsNumber;
     this.#createNewGun();
   }
 
   bindToElements() {
-    this.cylinderSpinButtonDescription = this.bindToElement(
-      CYLINDER_SPIN_BUTTON_DESCRIPTION
-    );
+    this.cylinderSpinButton = this.bindToElement(CYLINDER_SPIN_BUTTON);
     this.gunButton = this.bindToElement(PLAYGROUND_GUN);
   }
   //creating new gun at game start
@@ -33,6 +31,8 @@ export class Gun extends Common {
 
   //load at the start
   #loadCylinder = () => {
+    //cylinder without any bullets
+    this.cylinder.fill(0);
     //choosing bullets slots
     for (let i = 0; i < this.loadedBulletsNumber; i++) {
       let suggestedBulletPosition = Math.floor(Math.random() * 6);
@@ -47,19 +47,24 @@ export class Gun extends Common {
     console.log("gun loaded, now spin"); //in next version change to sound
   };
 
-  //method to spin cylinder
-  spinCylinder() {
+  //method to spin cylinder, must be arrow function to get this.cylinder form right scope for cylinder unlock listener
+  spinCylinder = () => {
     //
     let cylinderSpins = Math.floor(Math.random() * MAX_CYLINDER_SPINS);
     //overwritting "cylinder" can cause error, where existing bullet (1) is overwritten, that's why i create new variable
+    console.log(this.cylinder + " in spinning");
     let spinnedCylinder = this.cylinder.slice(0);
+    //cylinder spin
     for (let i = 0; i < spinnedCylinder.length; i++) {
-      spinnedCylinder[(i + cylinderSpins) % 6] = this.cylinder[i];
+      spinnedCylinder[(i + cylinderSpins) % CHAMBERS_NUMBER] = this.cylinder[i];
     }
     this.cylinder = spinnedCylinder;
-    console.log(this.cylinder);
-    console.log("cylinder spinned");
-  }
+    console.log("cylinder spinned " + this.cylinder);
+    //unlocking gun
+    this.triggerUnlockToggle();
+    //lock cylinder after first player's use
+    this.cylinderUnlockToggle();
+  };
   //gun spinning method
   spinGun() {
     //initial randoms for number of spins, and number that decides from whom spinning starts
@@ -78,13 +83,8 @@ export class Gun extends Common {
     }
   }
 
-  //add event listener on gunButton
-  triggerUnlockListener() {
-    this.gunButton.addEventListener("click", this.pullTrigger);
-  }
-
   //pulling trigger by player
-  pullTrigger() {
+  pullTrigger = () => {
     const { gun, endGame, changeActivePlayer } = game;
     if (gun.cylinder[0] == 1) {
       endGame();
@@ -97,9 +97,28 @@ export class Gun extends Common {
       cylinderAfterEmptyChamber.push(0);
       //override game gun's cylinder
       gun.cylinder = cylinderAfterEmptyChamber;
+      console.log("pulling trigger");
       console.log(gun.cylinder);
       //change active player
       changeActivePlayer();
     }
+  };
+
+  //add event listener on gunButton
+  triggerUnlockListener() {
+    this.gunButton.addEventListener("click", this.pullTrigger);
+  }
+
+  //toggiling trigger button (safe for using this button, when player must spin cylinder first)
+  triggerUnlockToggle() {
+    this.gunButton.disabled = !this.gunButton.disabled;
+  }
+
+  cylinderUnlockToggle() {
+    this.cylinderSpinButton.disabled = !this.cylinderSpinButton.disabled;
+  }
+
+  cylinderUnlockListener() {
+    this.cylinderSpinButton.addEventListener("click", this.spinCylinder);
   }
 }
