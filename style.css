@@ -154,11 +154,27 @@
 }
 
 .game-screen_rounds-counter {
+  display: flex;
   align-self: center;
   background-color: #ddd;
   width: 640px;
   height: 64px;
+  /* background-image: url("./assets/images/skull.png"); */
+}
+
+.rounds-counter_mark {
+  align-self: center;
+  width: 64px;
+  height: 64px;
+  background-repeat: no-repeat;
+}
+
+.counter_mark-blank {
   background-image: url("./assets/images/skull.png");
+}
+
+.counter_mark-shot {
+  background-image: url("./assets/images/skull_dead.png");
 }
 
 /* end-screen */

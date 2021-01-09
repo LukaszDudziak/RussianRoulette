@@ -1,11 +1,10 @@
 import { Common } from "./Common.esm.js";
 import { Gun } from "./Gun.esm.js";
 import { Player } from "./Player.esm.js";
+import { Statistics } from "./Statistics.esm.js";
 
 const CYLINDER_LOAD_BUTTON = "js-gun-cylinder-load-button";
 const BULLETS_NUMBER = "js-bullets-number";
-
-const GAME_ROUNDS_COUNTER = "js-game-rounds-counter";
 
 export const GAME_SCREEN = "js-game-screen";
 
@@ -14,11 +13,10 @@ class Game extends Common {
     super(GAME_SCREEN);
     this.bindToElements();
     this.#cylinderLoadListener();
-    // this.playerOne = new Player();
-    // this.playerTwo = new Player();
-    this.activePlayer = new Player();
+    this.activePlayer;
     this.loadedBulletsNumber;
     this.gun;
+    this.statistics;
   }
   //binding standard elements, and bulletsNumber nodeList, which provides information, how many bullets are getting loaded
   bindToElements() {
@@ -27,10 +25,11 @@ class Game extends Common {
   }
   //main method for gameflow
   playGame = () => {
-    console.log("players connected");
     this.#checkBulletsNumber();
     if (!this.loadedBulletsNumber == 0) {
       this.#disableChoices();
+      this.activePlayer = new Player();
+      this.statistics = new Statistics();
       this.gun = new Gun(this.loadedBulletsNumber);
       console.log(`In game cylinder [${this.gun.cylinder}]`);
       this.activePlayer.number = this.gun.spinGun();
@@ -97,6 +96,7 @@ class Game extends Common {
 
   //game end
   endGame = () => {
+    this.gun.triggerUnlockToggle();
     this.activePlayer.playersDeath();
   };
 }

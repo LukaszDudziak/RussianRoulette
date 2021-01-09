@@ -85,10 +85,14 @@ export class Gun extends Common {
 
   //pulling trigger by player
   pullTrigger = () => {
-    const { gun, endGame, changeActivePlayer } = game;
+    const { gun, endGame, changeActivePlayer, statistics } = game;
     if (gun.cylinder[0] == 1) {
+      //creating new mark on stats bar (sent with chamber value)
+      statistics.newRoundMark(1);
       endGame();
     } else {
+      //creating new mark on stats bar (sent with chamber value)
+      statistics.newRoundMark(0);
       //copy of original cylinder
       let cylinderAfterEmptyChamber = gun.cylinder.slice();
       //remove first position
