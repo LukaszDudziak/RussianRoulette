@@ -1,5 +1,7 @@
 :root {
   --scale-value: 1;
+  --gun-spin-value: 0;
+  --cylinder-spin-value: 0;
 }
 
 * {
@@ -112,9 +114,11 @@
   border: none;
   cursor: pointer;
   color: transparent;
+  transition: 2s;
 }
-.gun-cylinder_spin-button:hover {
-  color: red;
+
+.gun-cylinder_spin-button.spinning {
+  transform: rotate(calc(var(--cylinder-spin-value) * 360deg));
 }
 
 .game-screen_playground {
@@ -149,6 +153,11 @@
   background-color: transparent;
   transform: rotate(90deg);
   cursor: pointer;
+  transition: 3s;
+}
+
+.playground_gun.spinning {
+  transform: rotate(calc(calc(var(--gun-spin-value) + 1) * 360deg));
 }
 
 .gun_player_one {

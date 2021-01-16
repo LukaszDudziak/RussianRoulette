@@ -1,5 +1,6 @@
 import { Common, VISIBLE_MODE } from "./Common.esm.js";
 import { Gun } from "./Gun.esm.js";
+import { Animation } from "./Animations.esm.js";
 import { Player } from "./Player.esm.js";
 import { Statistics } from "./Statistics.esm.js";
 

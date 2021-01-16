@@ -1,4 +1,5 @@
 import { Common } from "./Common.esm.js";
+import { animation, Animation } from "./Animations.esm.js";
 import { game } from "./Game.esm.js";
 
 const CYLINDER_SPIN_BUTTON = "js-gun-cylinder-spin-button";
@@ -49,8 +50,12 @@ export class Gun extends Common {
 
   //method to spin cylinder, must be arrow function to get this.cylinder form right scope for cylinder unlock listener
   spinCylinder = () => {
-    //
-    let cylinderSpins = Math.floor(Math.random() * MAX_CYLINDER_SPINS);
+    //add animation for spinning cylinder
+    let cylinderSpins = Math.floor(Math.random() * MAX_CYLINDER_SPINS + 1);
+    animation.spinningCylinderAnimationToggle(
+      this.cylinderSpinButton,
+      cylinderSpins
+    );
     //overwritting "cylinder" can cause error, where existing bullet (1) is overwritten, that's why i create new variable
     console.log(this.cylinder + " in spinning");
     let spinnedCylinder = this.cylinder.slice(0);
@@ -71,6 +76,9 @@ export class Gun extends Common {
     let startingPlayer = Math.floor(Math.random() * 2);
     let gunSpins = Math.floor(Math.random() * MAX_GUN_SPINS);
 
+    //setting animation for spinning gun
+    animation.spinningGunAnimation(this.gunButton, gunSpins);
+
     if (
       (startingPlayer == 0 && gunSpins % 2 == 0) ||
       (startingPlayer == 1 && gunSpins % 2 == 1)
@@ -85,6 +93,8 @@ export class Gun extends Common {
 
   //pulling trigger by player
   pullTrigger = () => {
+    //remove 'spinningCylinder' class from button
+    animation.spinningCylinderAnimationToggle(this.cylinderSpinButton, -1);
     const { gun, endGame, changeActivePlayer, statistics } = game;
     if (gun.cylinder[0] == 1) {
       //creating new mark on stats bar (sent with chamber value)
