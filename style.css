@@ -124,6 +124,11 @@
   width: 100%;
 }
 
+.blurred {
+  -webkit-filter: contrast(50%) blur(5px);
+  filter: contrast(50%) blur(10px);
+}
+
 /* don't really know why, but when i make bgc in 256x256 box, the weird gray line appears on the top of player's portrait, this "trick" with +1px in height seems to deal with that weird problem */
 .playground_player {
   width: 256px;
@@ -187,6 +192,10 @@
 }
 
 .end-screen_modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 300px;
   display: flex;
   flex-direction: column;
@@ -200,7 +209,6 @@
 }
 
 .end-screen_button {
-  background-color: transparent;
   padding: 15px;
   margin: 20px;
 }

@@ -1,10 +1,12 @@
-import { Common } from "./Common.esm.js";
+import { Common, VISIBLE_MODE } from "./Common.esm.js";
 import { Gun } from "./Gun.esm.js";
 import { Player } from "./Player.esm.js";
 import { Statistics } from "./Statistics.esm.js";
 
 const CYLINDER_LOAD_BUTTON = "js-gun-cylinder-load-button";
 const BULLETS_NUMBER = "js-bullets-number";
+
+const GAME_END_MODAL = "js-end-screen";
 
 export const GAME_SCREEN = "js-game-screen";
 
@@ -22,6 +24,7 @@ class Game extends Common {
   bindToElements() {
     this.bulletsNumber = document.getElementsByName(BULLETS_NUMBER);
     this.cylinderLoadButton = this.bindToElement(CYLINDER_LOAD_BUTTON);
+    this.endGameModal = this.bindToElement(GAME_END_MODAL);
   }
   //main method for gameflow
   playGame = () => {
@@ -98,6 +101,8 @@ class Game extends Common {
   endGame = () => {
     this.gun.triggerUnlockToggle();
     this.activePlayer.playersDeath();
+    this.changeVisibilityScreen(this.endGameModal, VISIBLE_MODE);
+    this.blurGamePlayground(this.element);
   };
 }
 

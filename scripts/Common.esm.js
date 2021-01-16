@@ -1,3 +1,5 @@
+const BLURRED_CLASS = "blurred";
+
 export const HIDDEN_CLASS = "hidden";
 export const HIDDEN_MODE = false;
 export const VISIBLE_MODE = true;
@@ -19,5 +21,9 @@ export class Common {
     mode === VISIBLE_MODE
       ? element.classList.remove(HIDDEN_CLASS)
       : element.classList.add(HIDDEN_CLASS);
+  }
+
+  blurGamePlayground(element) {
+    element.classList.add(BLURRED_CLASS);
   }
 }
