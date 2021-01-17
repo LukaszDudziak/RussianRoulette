@@ -160,11 +160,8 @@
   transform: rotate(calc(calc(var(--gun-spin-value) + 1) * 360deg));
 }
 
-.gun_player_one {
-  transform: rotate(0deg);
-}
-.gun_player_two {
-  transform: rotate(0deg);
+.playground_gun.changePlayer {
+  transform: rotate(180deg);
 }
 
 .game-screen_rounds-counter {

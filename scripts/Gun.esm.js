@@ -72,21 +72,20 @@ export class Gun extends Common {
   };
   //gun spinning method
   spinGun() {
-    //initial randoms for number of spins, and number that decides from whom spinning starts
+    //initial randoms for number of spins, and number that decides from whom spinning starts, 1spin = 360deg
     let startingPlayer = Math.floor(Math.random() * 2);
     let gunSpins = Math.floor(Math.random() * MAX_GUN_SPINS);
-
-    //setting animation for spinning gun
-    animation.spinningGunAnimation(this.gunButton, gunSpins);
 
     if (
       (startingPlayer == 0 && gunSpins % 2 == 0) ||
       (startingPlayer == 1 && gunSpins % 2 == 1)
     ) {
-      this.gunButton.classList.add("gun_player_one");
+      //setting animation for spinning gun
+      animation.spinningGunAnimation(this.gunButton, gunSpins + 0.5);
       return 0;
     } else {
-      this.gunButton.classList.add("gun_player_two");
+      //setting animation for spinning gun
+      animation.spinningGunAnimation(this.gunButton, gunSpins);
       return 1;
     }
   }
@@ -94,7 +93,7 @@ export class Gun extends Common {
   //pulling trigger by player
   pullTrigger = () => {
     //remove 'spinningCylinder' class from button
-    animation.spinningCylinderAnimationToggle(this.cylinderSpinButton, -1);
+    // animation.spinningCylinderAnimationToggle(this.cylinderSpinButton, -1);
     const { gun, endGame, changeActivePlayer, statistics } = game;
     if (gun.cylinder[0] == 1) {
       //creating new mark on stats bar (sent with chamber value)

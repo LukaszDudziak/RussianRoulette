@@ -29,7 +29,6 @@ class Game extends Common {
   }
   //main method for gameflow
   playGame = () => {
-    this.transitionInProgress();
     this.#checkBulletsNumber();
     if (!this.loadedBulletsNumber == 0) {
       this.#disableChoices();
@@ -65,23 +64,16 @@ class Game extends Common {
 
   //for player - unlocking gun button, for AI automaticly pulling trigger
   #triggerUnlock() {
-    if (this.activePlayer.number == 1) {
-      this.gun.pullTrigger();
-    } else {
-      this.gun.triggerUnlockListener();
-    }
+    this.gun.triggerUnlockListener();
   }
 
   //for player - unlocking cylinder button, for AI automaticly pulling trigger
   #spinCylinder() {
     //locking gun trigger before player turn
     this.gun.triggerUnlockToggle();
-    if (this.activePlayer.number == 1) {
-      this.gun.spinCylinder();
-    } else {
-      this.gun.cylinderUnlockListener();
-    }
-    //unlock spin before player's turn (after AI turn)
+    this.gun.cylinderUnlockListener();
+
+    // //unlock spin before player's turn (after AI turn)
     this.gun.cylinderUnlockToggle();
   }
 
@@ -107,10 +99,6 @@ class Game extends Common {
     this.changeVisibilityScreen(this.endGameModal, VISIBLE_MODE);
     this.blurGamePlayground(this.element);
   };
-
-  transitionInProgress() {
-    window.addEventListener("transitionstart", console.log("animacja"));
-  }
 }
 
 //have to move it somewhere up
