@@ -161,7 +161,7 @@
 }
 
 .gun_player_one {
-  transform: rotate(180deg);
+  transform: rotate(0deg);
 }
 .gun_player_two {
   transform: rotate(0deg);

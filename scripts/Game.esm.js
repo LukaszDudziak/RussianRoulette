@@ -29,6 +29,7 @@ class Game extends Common {
   }
   //main method for gameflow
   playGame = () => {
+    this.transitionInProgress();
     this.#checkBulletsNumber();
     if (!this.loadedBulletsNumber == 0) {
       this.#disableChoices();
@@ -102,9 +103,14 @@ class Game extends Common {
   endGame = () => {
     this.gun.triggerUnlockToggle();
     this.activePlayer.playersDeath();
+    //show modal
     this.changeVisibilityScreen(this.endGameModal, VISIBLE_MODE);
     this.blurGamePlayground(this.element);
   };
+
+  transitionInProgress() {
+    window.addEventListener("transitionstart", console.log("animacja"));
+  }
 }
 
 //have to move it somewhere up
