@@ -74,7 +74,7 @@ export class Gun extends Common {
   spinGun() {
     //initial randoms for number of spins, and number that decides from whom spinning starts, 1spin = 360deg
     let startingPlayer = Math.floor(Math.random() * 2);
-    let gunSpins = Math.floor(Math.random() * MAX_GUN_SPINS);
+    let gunSpins = Math.floor(Math.random() * MAX_GUN_SPINS + 1);
 
     if (
       (startingPlayer == 0 && gunSpins % 2 == 0) ||
@@ -94,11 +94,11 @@ export class Gun extends Common {
   pullTrigger = () => {
     //remove 'spinningCylinder' class from button
     // animation.spinningCylinderAnimationToggle(this.cylinderSpinButton, -1);
-    const { gun, endGame, changeActivePlayer, statistics } = game;
+    const { gun, activePlayer, endGame, changeActivePlayer, statistics } = game;
     if (gun.cylinder[0] == 1) {
       //creating new mark on stats bar (sent with chamber value)
       statistics.newRoundMark(1);
-      endGame();
+      setTimeout(endGame);
     } else {
       //creating new mark on stats bar (sent with chamber value)
       statistics.newRoundMark(0);
@@ -112,17 +112,31 @@ export class Gun extends Common {
       gun.cylinder = cylinderAfterEmptyChamber;
       console.log("pulling trigger");
       console.log(gun.cylinder);
+      this.#handleSpinButtonClass();
       //change active player
       changeActivePlayer();
     }
   };
+
+  #handleSpinButtonClass() {
+    this.gunButton.style.setProperty("transition", "1s");
+    this.gunButton.classList.remove("spinning");
+
+    if (game.activePlayer.number == 1) {
+      this.gunButton.classList.remove("playerTwo");
+      this.gunButton.classList.add("playerOne");
+    } else {
+      this.gunButton.classList.remove("playerOne");
+      this.gunButton.classList.add("playerTwo");
+    }
+  }
 
   //add event listener on gunButton
   triggerUnlockListener() {
     this.gunButton.addEventListener("click", this.pullTrigger);
   }
 
-  //toggiling trigger button (safe for using this button, when player must spin cylinder first)
+  //toggle trigger button (safe for using this button, when player must spin cylinder first)
   triggerUnlockToggle() {
     this.gunButton.disabled = !this.gunButton.disabled;
   }

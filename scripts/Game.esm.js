@@ -72,7 +72,6 @@ class Game extends Common {
     //locking gun trigger before player turn
     this.gun.triggerUnlockToggle();
     this.gun.cylinderUnlockListener();
-
     // //unlock spin before player's turn (after AI turn)
     this.gun.cylinderUnlockToggle();
   }
@@ -96,8 +95,11 @@ class Game extends Common {
     this.gun.triggerUnlockToggle();
     this.activePlayer.playersDeath();
     //show modal
-    this.changeVisibilityScreen(this.endGameModal, VISIBLE_MODE);
-    this.blurGamePlayground(this.element);
+    setTimeout(
+      () => this.changeVisibilityScreen(this.endGameModal, VISIBLE_MODE),
+      3000
+    );
+    setTimeout(() => this.blurGamePlayground(this.element), 3000);
   };
 }
 

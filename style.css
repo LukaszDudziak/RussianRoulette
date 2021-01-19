@@ -2,6 +2,7 @@
   --scale-value: 1;
   --gun-spin-value: 0;
   --cylinder-spin-value: 0;
+  --dead-player-animation-time: 2s;
 }
 
 * {
@@ -84,6 +85,7 @@
 .bullets-number-input {
   display: none;
 }
+
 .bullets-number-input:checked + .bullets-number-radio {
   background-color: #eee;
 }
@@ -99,8 +101,31 @@
 }
 
 .gun-cylinder-load-button {
-  background-color: transparent;
+  position: relative;
+  overflow: hidden;
   padding: 20px;
+  background-color: transparent;
+  transition: 3s;
+}
+
+.gun-cylinder-load-button:disabled {
+  color: #ddd;
+}
+
+.gun-cylinder-load-button::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 100%;
+  background-color: transparent;
+  z-index: -1;
+  transition: 3s;
+}
+.gun-cylinder-load-button:disabled::after {
+  right: 0;
+  background-color: #555;
 }
 
 .gun-cylinder_spin-button {
@@ -141,7 +166,11 @@
   background-image: url(./assets/images/player.png);
   background-repeat: no-repeat;
   background-position: center;
-  transition: 0.3s;
+  transition: var(--dead-player-animation-time);
+}
+
+.playground_player.dead {
+  background-color: red;
 }
 
 .playground_gun {
@@ -160,8 +189,11 @@
   transform: rotate(calc(calc(var(--gun-spin-value) + 1) * 360deg));
 }
 
-.playground_gun.changePlayer {
+.playground_gun.playerOne {
   transform: rotate(180deg);
+}
+.playground_gun.playerTwo {
+  transform: rotate(360deg);
 }
 
 .game-screen_rounds-counter {

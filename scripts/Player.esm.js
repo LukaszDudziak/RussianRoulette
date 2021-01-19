@@ -21,6 +21,11 @@ export class Player extends Common {
 
   //killing player method
   playersDeath() {
+    if (game.activePlayer.number == 0) {
+      this.playerOne.classList.add("dead");
+    } else {
+      this.playerTwo.classList.add("dead");
+    }
     this.endGameVerdict.innerHTML = `Player ${game.activePlayer.number} is dead`;
   }
 }
