@@ -24,6 +24,6 @@ export class Common {
   }
 
   blurGamePlayground(element) {
-    element.classList.add(BLURRED_CLASS);
+    element.classList.toggle(BLURRED_CLASS);
   }
 }

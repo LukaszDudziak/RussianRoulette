@@ -23,4 +23,10 @@ export class Statistics extends Common {
     //append new mark on stats bar
     this.element.appendChild(newMark);
   }
+
+  statisticsReset() {
+    this.roundsCounter = 0;
+    console.log(this.element);
+    this.element.innerHTML = "";
+  }
 }

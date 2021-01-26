@@ -148,4 +148,9 @@ export class Gun extends Common {
   cylinderUnlockListener() {
     this.cylinderSpinButton.addEventListener("click", this.spinCylinder);
   }
+
+  gunReset() {
+    this.gunButton.classList.remove("playerOne", "playerTwo", "spinning");
+    game.gun.cylinder = null;
+  }
 }

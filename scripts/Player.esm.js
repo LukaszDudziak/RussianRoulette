@@ -28,4 +28,10 @@ export class Player extends Common {
     }
     this.endGameVerdict.innerHTML = `Player ${game.activePlayer.number} is dead`;
   }
+
+  playerReset() {
+    this.playerOne.classList.remove("dead");
+    this.playerTwo.classList.remove("dead");
+    game.activePlayer.number = null;
+  }
 }

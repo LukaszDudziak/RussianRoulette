@@ -1,13 +1,16 @@
-import { Common, VISIBLE_MODE } from "./Common.esm.js";
+import { Common, HIDDEN_CLASS, VISIBLE_MODE } from "./Common.esm.js";
 import { Gun } from "./Gun.esm.js";
 import { Animation } from "./Animations.esm.js";
 import { Player } from "./Player.esm.js";
 import { Statistics } from "./Statistics.esm.js";
+import { START_SCREEN } from "./MainMenu.esm.js";
 
 const CYLINDER_LOAD_BUTTON = "js-gun-cylinder-load-button";
 const BULLETS_NUMBER = "js-bullets-number";
 
 const GAME_END_MODAL = "js-end-screen";
+const MODAL_RESTART_BUTTON = "js-restart-button";
+const MODAL_BACK_TO_MENU_BUTTON = "js-menu-button";
 
 export const GAME_SCREEN = "js-game-screen";
 
@@ -26,6 +29,7 @@ class Game extends Common {
     this.bulletsNumber = document.getElementsByName(BULLETS_NUMBER);
     this.cylinderLoadButton = this.bindToElement(CYLINDER_LOAD_BUTTON);
     this.endGameModal = this.bindToElement(GAME_END_MODAL);
+    this.backToMenuButton = this.bindToElement(MODAL_BACK_TO_MENU_BUTTON);
   }
   //main method for gameflow
   playGame = () => {
@@ -62,6 +66,15 @@ class Game extends Common {
     });
   }
 
+  #enableChoices() {
+    this.cylinderLoadButton.addEventListener("click", this.playGame);
+    this.cylinderLoadButton.disabled = false;
+    this.bulletsNumber.forEach((radio) => {
+      radio.disabled = false;
+      radio.checked = false;
+    });
+  }
+
   //for player - unlocking gun button, for AI automaticly pulling trigger
   #triggerUnlock() {
     this.gun.triggerUnlockListener();
@@ -90,6 +103,22 @@ class Game extends Common {
     this.#triggerUnlock();
   };
 
+  restartGame = () => {
+    this.blurGamePlayground(this.element);
+    this.activePlayer.playerReset();
+    this.gun.gunReset();
+    this.statistics.statisticsReset();
+    this.loadedBulletsNumber = 0;
+    this.#enableChoices();
+  };
+
+  #backToMenu = () => {
+    this.changeVisibilityScreen(this.element, HIDDEN_CLASS);
+    this.changeVisibilityScreen(this.endGameModal, HIDDEN_CLASS);
+    this.changeVisibilityScreen(this.bindToElement(START_SCREEN), VISIBLE_MODE);
+    this.restartGame();
+  };
+
   //game end
   endGame = () => {
     this.gun.triggerUnlockToggle();
@@ -100,6 +129,7 @@ class Game extends Common {
       3000
     );
     setTimeout(() => this.blurGamePlayground(this.element), 3000);
+    this.backToMenuButton.addEventListener("click", this.#backToMenu);
   };
 }
 
