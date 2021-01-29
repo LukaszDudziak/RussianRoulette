@@ -151,6 +151,9 @@ export class Gun extends Common {
 
   gunReset() {
     this.gunButton.classList.remove("playerOne", "playerTwo", "spinning");
-    game.gun.cylinder = null;
+    this.gunButton.removeEventListener("click", this.pullTrigger);
+    this.cylinderSpinButton.removeEventListener("click", this.spinCylinder);
+    this.cylinderUnlockToggle();
+    game.gun.cylinder.splice(0);
   }
 }

@@ -30,6 +30,7 @@ class Game extends Common {
     this.cylinderLoadButton = this.bindToElement(CYLINDER_LOAD_BUTTON);
     this.endGameModal = this.bindToElement(GAME_END_MODAL);
     this.backToMenuButton = this.bindToElement(MODAL_BACK_TO_MENU_BUTTON);
+    this.restartGameButton = this.bindToElement(MODAL_RESTART_BUTTON);
   }
   //main method for gameflow
   playGame = () => {
@@ -103,7 +104,8 @@ class Game extends Common {
     this.#triggerUnlock();
   };
 
-  restartGame = () => {
+  #restartGame = () => {
+    this.changeVisibilityScreen(this.endGameModal, HIDDEN_CLASS);
     this.blurGamePlayground(this.element);
     this.activePlayer.playerReset();
     this.gun.gunReset();
@@ -114,7 +116,6 @@ class Game extends Common {
 
   #backToMenu = () => {
     this.changeVisibilityScreen(this.element, HIDDEN_CLASS);
-    this.changeVisibilityScreen(this.endGameModal, HIDDEN_CLASS);
     this.changeVisibilityScreen(this.bindToElement(START_SCREEN), VISIBLE_MODE);
     this.restartGame();
   };
@@ -130,6 +131,7 @@ class Game extends Common {
     );
     setTimeout(() => this.blurGamePlayground(this.element), 3000);
     this.backToMenuButton.addEventListener("click", this.#backToMenu);
+    this.restartGameButton.addEventListener("click", this.#restartGame);
   };
 }
 
