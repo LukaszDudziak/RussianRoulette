@@ -4,7 +4,7 @@ import { game } from "./Game.esm.js";
 
 const PLAYGROUND_PLAYER_ONE = "js-game-player-one";
 const PLAYGROUND_PLAYER_TWO = "js-game-player-two";
-const END_GAME_VERDICT = "js-end-screen-dead-player";
+const GAME_END_MODAL_VERDICT = "js-end-screen_verdict-content";
 
 export class Player extends Common {
   constructor() {
@@ -16,7 +16,7 @@ export class Player extends Common {
   bindToElements() {
     this.playerOne = this.bindToElement(PLAYGROUND_PLAYER_ONE);
     this.playerTwo = this.bindToElement(PLAYGROUND_PLAYER_TWO);
-    this.endGameVerdict = this.bindToElement(END_GAME_VERDICT);
+    this.verdictContent = this.bindToElement(GAME_END_MODAL_VERDICT);
   }
 
   //killing player method
@@ -26,7 +26,7 @@ export class Player extends Common {
     } else {
       this.playerTwo.classList.add("dead");
     }
-    this.endGameVerdict.innerHTML = `Player ${game.activePlayer.number} is dead`;
+    this.verdictContent.innerHTML = `Player number ${game.activePlayer.number} is dead, after ${game.statistics.roundsCounter} rounds`;
   }
 
   playerReset() {

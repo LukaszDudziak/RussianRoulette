@@ -243,7 +243,9 @@
 }
 
 .end-screen_verdict {
+  margin-top: 10px;
   line-height: 40px;
+  text-align: center;
 }
 
 .end-screen_button {
