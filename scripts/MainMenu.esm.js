@@ -1,6 +1,7 @@
 import { Common, HIDDEN_MODE, VISIBLE_MODE } from "./Common.esm.js";
 import { GAME_SCREEN } from "./Game.esm.js";
 import { SETTINGS_SCREEN } from "./Settings.esm.js";
+import { Sounds } from "./Sounds.esm.js";
 
 //DOM elements id's
 const NEW_GAME_BUTTON = "js-start-button";
@@ -13,6 +14,7 @@ class MainMenu extends Common {
     //binding start screen in common class
     super(START_SCREEN);
     this.bindMenuElements();
+    this.setMusic();
   }
   //binding menu elements and set listeners on buttons
   bindMenuElements() {
@@ -47,6 +49,11 @@ class MainMenu extends Common {
   //       VISIBLE_MODE
   //     );
   //   }
+
+  setMusic() {
+    const music = new Sounds("../assets/sounds/LoungeGame2.mp3");
+    music.startMusic();
+  }
 }
 
 export const mainMenu = new MainMenu();

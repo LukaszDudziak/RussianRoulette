@@ -117,7 +117,7 @@ class Game extends Common {
   #backToMenu = () => {
     this.changeVisibilityScreen(this.element, HIDDEN_CLASS);
     this.changeVisibilityScreen(this.bindToElement(START_SCREEN), VISIBLE_MODE);
-    this.restartGame();
+    this.#restartGame();
   };
 
   //game end
