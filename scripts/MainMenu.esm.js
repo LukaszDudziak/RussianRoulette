@@ -14,7 +14,7 @@ class MainMenu extends Common {
     //binding start screen in common class
     super(START_SCREEN);
     this.bindMenuElements();
-    this.setMusic();
+    this.music = new Sounds("../assets/sounds/LoungeGame2.mp3");
   }
   //binding menu elements and set listeners on buttons
   bindMenuElements() {
@@ -49,11 +49,6 @@ class MainMenu extends Common {
   //       VISIBLE_MODE
   //     );
   //   }
-
-  setMusic() {
-    const music = new Sounds("../assets/sounds/LoungeGame2.mp3");
-    music.startMusic();
-  }
 }
 
 export const mainMenu = new MainMenu();

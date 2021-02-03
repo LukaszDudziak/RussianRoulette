@@ -1,5 +1,5 @@
 import { Common, HIDDEN_MODE, VISIBLE_MODE } from "./Common.esm.js";
-import { START_SCREEN } from "./MainMenu.esm.js";
+import { START_SCREEN, mainMenu } from "./MainMenu.esm.js";
 
 //DOM elements
 const MUTE_MUSIC_BUTTON = "js-mute-music-button";
@@ -12,6 +12,7 @@ class Settings extends Common {
   constructor() {
     super(SETTINGS_SCREEN);
     this.bindSettingsElements();
+    this.isMusicMuted = true;
   }
   //binding elements from settings screen
   bindSettingsElements() {
@@ -19,14 +20,22 @@ class Settings extends Common {
     const muteSoundsButton = this.bindToElement(MUTE_SOUNDS_BUTTON);
     const backToMenuButton = this.bindToElement(BACK_TO_MENU_BUTTON);
 
-    muteMusicButton.addEventListener("click", () => this.muteMusic());
+    muteMusicButton.addEventListener("click", (e) => this.muteMusic(e));
     muteSoundsButton.addEventListener("click", () => this.muteSounds());
     backToMenuButton.addEventListener("click", () => this.backToMenu());
   }
 
-  muteMusic() {
-    console.log("muteMusic");
-  }
+  muteMusic = (e) => {
+    if (this.isMusicMuted) {
+      e.target.innerHTML = "Mute music";
+      mainMenu.music.startMusic();
+      this.isMusicMuted = !this.isMusicMuted;
+    } else {
+      e.target.innerHTML = "Play music";
+      mainMenu.music.stopSound();
+      this.isMusicMuted = !this.isMusicMuted;
+    }
+  };
 
   muteSounds() {
     console.log("muteSounds");

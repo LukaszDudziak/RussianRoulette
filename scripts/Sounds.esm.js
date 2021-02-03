@@ -15,7 +15,7 @@ export class Sounds {
   }
 
   startMusic = () => {
-    this.sound.setAttribute("loop", true);
+    this.sound.setAttribute("loop", "true");
     this.sound.play();
   };
 }
