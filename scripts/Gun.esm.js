@@ -50,8 +50,6 @@ export class Gun extends Common {
         i--;
       }
     }
-    console.log(this.cylinder);
-    console.log("gun loaded, now spin"); //in next version change to sound
   };
 
   //method to spin cylinder, must be arrow function to get this.cylinder form right scope for cylinder unlock listener
@@ -64,14 +62,12 @@ export class Gun extends Common {
       cylinderSpins
     );
     //overwritting "cylinder" can cause error, where existing bullet (1) is overwritten, that's why i create new variable
-    console.log(this.cylinder + " in spinning");
     let spinnedCylinder = this.cylinder.slice(0);
     //cylinder spin
     for (let i = 0; i < spinnedCylinder.length; i++) {
       spinnedCylinder[(i + cylinderSpins) % CHAMBERS_NUMBER] = this.cylinder[i];
     }
     this.cylinder = spinnedCylinder;
-    console.log("cylinder spinned " + this.cylinder);
     //unlocking gun
     this.triggerUnlockToggle();
     //lock cylinder after first player's use
@@ -120,8 +116,6 @@ export class Gun extends Common {
       cylinderAfterEmptyChamber.push(0);
       //override game gun's cylinder
       gun.cylinder = cylinderAfterEmptyChamber;
-      console.log("pulling trigger");
-      console.log(gun.cylinder);
       this.#handleSpinButtonClass();
       //change active player
       changeActivePlayer();

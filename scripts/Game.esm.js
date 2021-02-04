@@ -42,9 +42,7 @@ class Game extends Common {
       this.activePlayer = new Player();
       this.statistics = new Statistics();
       this.gun = new Gun(this.loadedBulletsNumber);
-      console.log(`In game cylinder [${this.gun.cylinder}]`);
       this.activePlayer.number = this.gun.spinGun();
-      console.log(`active player is ` + this.activePlayer.number);
       this.#triggerUnlock();
     } else {
       alert("How many bullets?"); //in next version change to animation
@@ -99,7 +97,6 @@ class Game extends Common {
   changeActivePlayer = () => {
     //changing active player, with use of his number
     this.activePlayer.number = Number(!this.activePlayer.number);
-    console.log(this.activePlayer.number + " is now active");
     //spin cylinder before pulling trigger
     this.#spinCylinder();
     //looping game
