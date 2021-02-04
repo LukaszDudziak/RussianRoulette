@@ -29,7 +29,7 @@ export const loadingSound = new Sounds(
   "../assets/sounds/Cartridges_Loaded_001.mp3"
 );
 export const spinningCylinderSound = new Sounds(
-  "https://raw.githubusercontent.com/LukaszDudziak/RussianRoulette/tree/master/docs/assets/sounds/Spinning_Cylinder_Clicky_004.mp3"
+  "https://raw.githubusercontent.com/LukaszDudziak/RussianRoulette/master/docs/assets/sounds/Spinning_Cylinder_Clicky_004.mp3"
 );
 export const dyingPlayer = new Sounds("../assets/sounds/wilhelmscream.mp3");
 export const dryShot = new Sounds("../assets/sounds/Dry_Fire_003.mp3");
