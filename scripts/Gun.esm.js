@@ -1,6 +1,12 @@
 import { Common } from "./Common.esm.js";
 import { animation, Animation } from "./Animations.esm.js";
 import { game } from "./Game.esm.js";
+import {
+  spinningCylinderSound,
+  dyingPlayer,
+  dryShot,
+  shot,
+} from "./Sounds.esm.js";
 
 const CYLINDER_SPIN_BUTTON = "js-gun-cylinder-spin-button";
 
@@ -51,6 +57,7 @@ export class Gun extends Common {
   //method to spin cylinder, must be arrow function to get this.cylinder form right scope for cylinder unlock listener
   spinCylinder = () => {
     //add animation for spinning cylinder
+    spinningCylinderSound.playSound();
     let cylinderSpins = Math.floor(Math.random() * MAX_CYLINDER_SPINS + 1);
     animation.spinningCylinderAnimationToggle(
       this.cylinderSpinButton,
@@ -96,10 +103,13 @@ export class Gun extends Common {
     // animation.spinningCylinderAnimationToggle(this.cylinderSpinButton, -1);
     const { gun, activePlayer, endGame, changeActivePlayer, statistics } = game;
     if (gun.cylinder[0] == 1) {
+      shot.playSound();
+      dyingPlayer.playSound();
       //creating new mark on stats bar (sent with chamber value)
       statistics.newRoundMark(1);
       setTimeout(endGame);
     } else {
+      dryShot.playSound();
       //creating new mark on stats bar (sent with chamber value)
       statistics.newRoundMark(0);
       //copy of original cylinder

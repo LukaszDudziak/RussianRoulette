@@ -1,3 +1,5 @@
+import { settings } from "./Settings.esm.js";
+
 export class Sounds {
   constructor(src) {
     this.sound = document.createElement("audio");
@@ -7,10 +9,13 @@ export class Sounds {
   }
 
   playSound() {
-    this.sound.play();
+    if (!settings.isSoundMuted) {
+      this.sound.play();
+    }
+    return;
   }
 
-  stopSound() {
+  stopMusic() {
     this.sound.pause();
   }
 
@@ -19,3 +24,15 @@ export class Sounds {
     this.sound.play();
   };
 }
+
+export const loadingSound = new Sounds(
+  "../assets/sounds/Cartridges_Loaded_001.mp3"
+);
+export const spinningCylinderSound = new Sounds(
+  "../assets/sounds/Spinning_Cylinder_Clicky_004.mp3"
+);
+export const dyingPlayer = new Sounds("../assets/sounds/wilhelmscream.mp3");
+export const dryShot = new Sounds("../assets/sounds/Dry_Fire_003.mp3");
+export const shot = new Sounds(
+  "../assets/sounds/GUN_FIRE-GoodSoundForYou-820112263.mp3"
+);

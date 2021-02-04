@@ -4,6 +4,7 @@ import { Animation } from "./Animations.esm.js";
 import { Player } from "./Player.esm.js";
 import { Statistics } from "./Statistics.esm.js";
 import { START_SCREEN } from "./MainMenu.esm.js";
+import { loadingSound } from "./Sounds.esm.js";
 
 const CYLINDER_LOAD_BUTTON = "js-gun-cylinder-load-button";
 const BULLETS_NUMBER = "js-bullets-number";
@@ -34,6 +35,7 @@ class Game extends Common {
   }
   //main method for gameflow
   playGame = () => {
+    loadingSound.playSound();
     this.#checkBulletsNumber();
     if (!this.loadedBulletsNumber == 0) {
       this.#disableChoices();

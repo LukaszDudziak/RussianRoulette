@@ -13,6 +13,7 @@ class Settings extends Common {
     super(SETTINGS_SCREEN);
     this.bindSettingsElements();
     this.isMusicMuted = true;
+    this.isSoundMuted = false;
   }
   //binding elements from settings screen
   bindSettingsElements() {
@@ -21,7 +22,7 @@ class Settings extends Common {
     const backToMenuButton = this.bindToElement(BACK_TO_MENU_BUTTON);
 
     muteMusicButton.addEventListener("click", (e) => this.muteMusic(e));
-    muteSoundsButton.addEventListener("click", () => this.muteSounds());
+    muteSoundsButton.addEventListener("click", (e) => this.muteSound(e));
     backToMenuButton.addEventListener("click", () => this.backToMenu());
   }
 
@@ -32,13 +33,19 @@ class Settings extends Common {
       this.isMusicMuted = !this.isMusicMuted;
     } else {
       e.target.innerHTML = "Play music";
-      mainMenu.music.stopSound();
+      mainMenu.music.stopMusic();
       this.isMusicMuted = !this.isMusicMuted;
     }
   };
 
-  muteSounds() {
-    console.log("muteSounds");
+  muteSound(e) {
+    if (this.isSoundMuted) {
+      e.target.innerHTML = "Mute sound";
+      this.isSoundMuted = !this.isSoundMuted;
+    } else {
+      e.target.innerHTML = "Enable sound";
+      this.isSoundMuted = !this.isSoundMuted;
+    }
   }
 
   backToMenu() {
@@ -47,4 +54,4 @@ class Settings extends Common {
   }
 }
 
-const settings = new Settings();
+export const settings = new Settings();
