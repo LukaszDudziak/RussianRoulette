@@ -14,7 +14,7 @@ class MainMenu extends Common {
     //binding start screen in common class
     super(START_SCREEN);
     this.bindMenuElements();
-    this.music = new Sounds("../assets/sounds/LoungeGame2.mp3");
+    this.music = new Sounds("./assets/sounds/LoungeGame2.mp3");
   }
   //binding menu elements and set listeners on buttons
   bindMenuElements() {
